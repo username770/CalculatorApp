@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace GitExercise
 {
@@ -6,6 +7,16 @@ namespace GitExercise
     {
         public static void Main()
         {
+
+            bool Auth = CheckCredentials();
+
+            if(!Auth)
+            {
+                Console.WriteLine("Access Denied.");
+                Console.ReadKey(true);
+                return;
+            }
+
             Console.WriteLine("Console Calculator App");
             Console.WriteLine(new string('-', 15));
 
@@ -35,10 +46,26 @@ namespace GitExercise
                 case "m":
                     OptionsManager.Multiply(a, b);
                     break;
+                case "d":
+                    OptionsManager.Divide(a, b);
+                    break;
+                case "sabs":
+                    OptionsManager.SubtractAbs(a, b);
+                    break;
             }
 
             Console.WriteLine("Pres any key to close the app...");
             Console.ReadKey(true);
         }
+        
+        private static bool CheckCredentials()
+        {
+            string pass = Console.ReadLine();
+            Console.Clear();
+
+            return pass == Password;
+        }
+
+        private const string Password = "abcd1234";
     }
 }
